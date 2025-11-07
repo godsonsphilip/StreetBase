@@ -15,9 +15,9 @@ def load_lottie_file(filepath: str):
 
 
 # --- LOAD ANIMATIONS (AI, Analytics, Market Trend) ---
-ai_data = load_lottie_file("Assets/ai_data.json")
-analytics_viz = load_lottie_file("Assets/analytics_viz.json")
-market_forecast = load_lottie_file("Assets/market_forecast.json")
+ai_data = load_lottie_file("../Assets/ai_data.json")
+analytics_viz = load_lottie_file("../Assets/analytics_viz.json")
+market_forecast = load_lottie_file("../Assets/market_forecast.json")
 
 # --- CUSTOM CSS (animations + styling) ---
 # --- CUSTOM CSS (Brand Palette: Light + Dark Ready) ---
