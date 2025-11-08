@@ -4,7 +4,7 @@ import requests # Also keeping for Lottie if needed
 import os
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="SmartBricks - AI Real Estate Valuation",
+    page_title="StreetBase - AI Real Estate Valuation",
     page_icon="🏠",
     layout="wide" # Use wide layout for more space
     # initial_sidebar_state="expanded" # Optional: if you had a sidebar
@@ -203,7 +203,7 @@ def render_brand_header():
     # Brand title
     st.markdown(
         """
-            <span class="brand-title">SmartBricks</span>
+            <span class="brand-title">StreetBase</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -211,23 +211,18 @@ def render_brand_header():
 
 
 def render_hero_section():
-    """
-    Renders the main hero section with title, description, bullet points, and CTA buttons,
-    matching the reference image layout.
-    """
-    # Use a raw HTML div to wrap the hero section and apply the main-hero-container styling
-    st.markdown('<div class="main-hero-container">', unsafe_allow_html=True)
-    
-    col_left, col_right = st.columns([2.5, 1]) # Adjust column ratios
+    # Anchor that our CSS targets; the NEXT horizontal block (columns) becomes the card
+    st.markdown('<div id="hero-card-anchor"></div>', unsafe_allow_html=True)
+
+    col_left, col_right = st.columns([2.5, 1], gap="large")
 
     with col_left:
         st.title("AI-Powered Real Estate Valuation")
         st.write("""
         Predicting house prices is complex, influenced by location, size, rooms, and economic conditions. 
-        SmartBricks uses *supervised machine learning* to accurately predict property values 
+        StreetBase uses *supervised machine learning* to accurately predict property values 
         based on historical data, providing valuable insights into housing price estimation.
         """)
-        
         st.markdown("""
         <ul>
             <li>✨ <b>Real-time AI valuation</b> using regression models</li>
@@ -236,11 +231,8 @@ def render_hero_section():
             <li>📊 Trained on comprehensive <b>Indian real estate data</b></li>
         </ul>
         """, unsafe_allow_html=True)
-        
-        # Add some space before buttons
-        st.write("") 
-        
-        # Use two columns for buttons for better control of spacing
+
+        st.write("")
         button_col1, button_col2, _ = st.columns([0.8, 0.8, 2])
         with button_col1:
             if st.button("Try AI Valuation", type="primary"):
@@ -249,37 +241,44 @@ def render_hero_section():
         with button_col2:
             if st.button("View Insights", type="secondary"):
                 st.success("Displaying market insights!")
-    
-    with col_right:
-        # Quick Insights Box
-        st.markdown('<div class="quick-insights-box">', unsafe_allow_html=True)
-        st.markdown("<h2>Quick Insights</h2>", unsafe_allow_html=True) # Use raw HTML for h2 to target CSS
-        st.markdown("""
-            <ul class="insights-list">
-                <li>Fast & Accurate AI predictions</li>
-                <li>Beautiful UI built with Streamlit</li>
-                <li>Multiple ML algorithms evaluated</li>
-                <li>Comprehensive datasets from major Indian cities</li>
-                <li>Feature analysis for price factors</li>
-            </ul>
-        """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True) # Close quick-insights-box div
 
-    st.markdown('</div>', unsafe_allow_html=True) # Close main-hero-container div
+    with col_right:
+        st.markdown(
+            """
+            <div class="quick-insights-box">
+                <h2>Quick Insights</h2>
+                <ul class="insights-list">
+                    <li>Fast & Accurate AI predictions</li>
+                    <li>Beautiful UI built with Streamlit</li>
+                    <li>Multiple ML algorithms evaluated</li>
+                    <li>Comprehensive datasets from major Indian cities</li>
+                    <li>Feature analysis for price factors</li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+
 
 
 def render_cta_banner():
-    """
-    Renders the bottom call-to-action banner matching the reference image.
-    """
-    st.markdown('<div class="cta-banner">', unsafe_allow_html=True)
-    st.markdown('<span class="emoji">🚀</span>', unsafe_allow_html=True)
-    st.markdown("<h2>Ready to Evaluate Your Property?</h2>", unsafe_allow_html=True)
-    st.write("""
-    Get instant AI-powered property valuation based on location, size, amenities, and market trends. 
-    Our machine learning model analyzes multiple factors to provide accurate price estimates.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="cta-banner">
+            <span class="emoji">🚀</span>
+            <h2>Ready to Evaluate Your Property?</h2>
+            <p>
+                Get instant AI-powered property valuation based on location, size, amenities, and market trends.
+                Our machine learning model analyzes multiple factors to provide accurate price estimates.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
 # --- Main App Execution ---
 # --- Main App Execution ---

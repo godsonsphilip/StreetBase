@@ -3,15 +3,12 @@ import os
 import sys
 import streamlit as st
 
-
-
 # --- Add root path for imports ---
 ROOT = os.path.dirname(os.path.dirname(__file__))  # Go up to project root
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 # --- Import custom components ---
-
 from components.NavBar.navbar import navbar
 from components.Hero import (
     custom_css_injection,
@@ -20,10 +17,11 @@ from components.Hero import (
     render_cta_banner
 )
 from components.features import load_feature_section
+from components.simple_app import load_valuation_section  # ✅ NEW IMPORT
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
-    page_title="SmartBricks | Home",
+    page_title="StreetBase | Home",
     page_icon="🏠",
     layout="wide"
 )
@@ -63,8 +61,19 @@ render_brand_header()
 render_hero_section()
 render_cta_banner()
 
+
+# ---------------- VALUATION SECTION ----------------
+st.markdown("<section>", unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center; color:#003366;'>💰 Property Valuation</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#444;'>Try our AI-powered valuation engine below</p>", unsafe_allow_html=True)
+
+load_valuation_section()  # ✅ NEW SECTION CALL
+
+st.markdown("</section>", unsafe_allow_html=True)
+
+# ---------------- FOOTER ----------------
+st.markdown("<br><br>", unsafe_allow_html=True)
+
 # ---------------- FEATURES SECTION ----------------
 load_feature_section()
-
-# ---------------- FOOTER (already included in features) ----------------
-st.markdown("<br><br>", unsafe_allow_html=True)

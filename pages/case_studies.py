@@ -1,7 +1,8 @@
 import streamlit as st
+from components.NavBar.navbar import navbar
 
 # ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="Case Studies | SmartBricks AI", page_icon="🏙️", layout="wide")
+st.set_page_config(page_title="Case Studies | StreetBase AI", page_icon="🏙️", layout="wide")
 
 # ---------------- CUSTOM STYLES ----------------
 st.markdown("""
@@ -106,6 +107,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+navbar()  # your custom navbar (includes Login/Signup buttons)
+
 # ---------------- HEADER ----------------
 st.markdown("<div class='title'>🏗️ Case Studies</div>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Real-world AI Transformations in India's Real Estate Market</div>", unsafe_allow_html=True)
@@ -163,7 +166,7 @@ else:
         st.subheader("📊 Predictive Market Insights — Bengaluru, India")
         st.write("""
         Bengaluru’s housing demand mirrors its booming tech industry.  
-        Using **LSTM-based time series models**, SmartBricks delivers live forecasts of housing prices and investment growth corridors.
+        Using **LSTM-based time series models**, StreetBase delivers live forecasts of housing prices and investment growth corridors.
         """)
         st.markdown("<div class='metric'>🧠 LSTM + Prophet ensemble model for 7 years of transaction data</div>", unsafe_allow_html=True)
         st.markdown("<div class='metric'>🔍 Incorporated IT job data, metro expansions, and infra growth</div>", unsafe_allow_html=True)
@@ -191,6 +194,6 @@ else:
 # ---------------- FOOTER ----------------
 st.markdown("---")
 st.markdown(
-    "<p style='text-align:center; color:#666;'>© 2025 SmartBricks | Empowering Indian Real Estate with AI-Driven Insights</p>",
+    "<p style='text-align:center; color:#666;'>© 2025 StreetBase | Empowering Indian Real Estate with AI-Driven Insights</p>",
     unsafe_allow_html=True
 )

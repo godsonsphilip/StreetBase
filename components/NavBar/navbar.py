@@ -74,7 +74,7 @@ def navbar():
       <div class="container">
         <div class="nav-left">
           {logo_html}
-          <div class="brand">SmartBricks</div>
+          <div class="brand">StreetBase</div>
         </div>
         <div class="nav-options">
           <a href="?page=home">Home</a>

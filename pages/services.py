@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
+from components.NavBar.navbar import navbar
 
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Our Services | AI Real Estate", page_icon="🏠", layout="wide")
@@ -120,6 +121,7 @@ a:hover{ color:#1e40af; }
 </style>
 """, unsafe_allow_html=True)
 
+navbar()  # your custom navbar (includes Login/Signup buttons)
 
 # --- PAGE HEADER ---
 st.markdown("<h2>Our Services</h2>", unsafe_allow_html=True)
