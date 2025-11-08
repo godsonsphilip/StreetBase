@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 from components.NavBar.navbar import navbar
+import os
 
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Our Services | AI Real Estate", page_icon="🏠", layout="wide")
@@ -16,9 +17,14 @@ def load_lottie_file(filepath: str):
 
 
 # --- LOAD ANIMATIONS (AI, Analytics, Market Trend) ---
-ai_data = load_lottie_file("C:\\Users\\godso\\Downloads\\Infosys\\SmartBricks\\Assets\\ai_data.json")
-analytics_viz = load_lottie_file("C:\\Users\\godso\\Downloads\\Infosys\\SmartBricks\\Assets\\analytics_viz.json")
-market_forecast = load_lottie_file("C:\\Users\\godso\\Downloads\\Infosys\\SmartBricks\\Assets\\market_forecast.json")
+
+
+base_path = os.path.join(os.path.dirname(__file__), "..", "Assets")
+
+ai_data = load_lottie_file(os.path.join(base_path, "ai_data.json"))
+analytics_viz = load_lottie_file(os.path.join(base_path, "analytics_viz.json"))
+market_forecast = load_lottie_file(os.path.join(base_path, "market_forecast.json"))
+
 
 # --- CUSTOM CSS (animations + styling) ---
 # --- CUSTOM CSS (Brand Palette: Light + Dark Ready) ---
@@ -238,3 +244,10 @@ with st.form("quote_form"):
             st.success(f"Thank you, {name}! Our team will reach out soon about {service_choice}.")
         else:
             st.warning("Please fill out your name and email before submitting.")
+def load_services_page():
+    import streamlit as st
+    from components.NavBar.navbar import navbar
+
+    navbar()
+
+    
