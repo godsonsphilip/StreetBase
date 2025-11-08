@@ -1,111 +1,159 @@
-import streamlit as st
+# --- put these 5 lines at the very top ---
+from pathlib import Path
+import sys
+ROOT = Path(__file__).resolve().parents[1]  # points to .../SmartBricks
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+# -----------------------------------------
+
 from components.NavBar.navbar import navbar
+
+import streamlit as st
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Case Studies | StreetBase AI", page_icon="🏙️", layout="wide")
 
-# ---------------- CUSTOM STYLES ----------------
 st.markdown("""
     <style>
-        /* General Styling */
-        body { background-color: #f9fafc; font-family: 'Poppins', sans-serif; }
+        /* Force light mode and readable text */
+        html, body, [data-testid="stAppViewContainer"] {
+            background: #ffffff !important;
+            color: #1f2937 !important;
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6,
+        p, span, li, strong, em, small,
+        .stMarkdown, .stText, .stCaption, .stHeader,
+        [data-testid="stMarkdownContainer"] {
+            color: #1f2937 !important;
+        }
 
         /* Titles */
-        .title {
-            text-align: center;
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: #002244;
-            margin-top: 0.3em;
-            letter-spacing: 0.5px;
+        .title { 
+            text-align:center; 
+            font-size:2.6rem; 
+            font-weight:700; 
+            color:#002244 !important; 
+            margin-top:.3em; 
+            letter-spacing:.5px; 
         }
-        .subtitle {
-            text-align: center;
-            font-size: 1.15rem;
-            color: #666;
-            margin-bottom: 2.2em;
-        }
-
-        /* Case Study Cards */
-        .card {
-            background-color: white;
-            border-radius: 18px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            padding: 1.2em;
-            transition: 0.3s;
-            height: 100%;
-            cursor: pointer;
-            border-top: 4px solid #FF6600;
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        }
-        .card img {
-            border-radius: 12px;
-            margin-bottom: 1em;
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .card-title {
-            color: #003366;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.3em;
-        }
-        .card-location {
-            color: #FF6600;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.5em;
-        }
-        .card-text {
-            color: #333;
-            font-size: 0.9rem;
-            line-height: 1.5;
+        .subtitle { 
+            text-align:center; 
+            font-size:1.15rem; 
+            color:#4b5563 !important; 
+            margin-bottom:2.2em; 
         }
 
-        /* Detail section */
-        .detail-box {
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-            padding: 2em;
-            margin-top: 1.5em;
+        /* Card Design */
+        .card { 
+            background:#fff; 
+            border-radius:18px; 
+            box-shadow:0 3px 12px rgba(0,0,0,.08); 
+            padding:1.2em; 
+            transition:.3s; 
+            height:100%; 
+            cursor:pointer; 
+            border-top:4px solid #FF6600; 
         }
-        .metric {
-            background-color: #f5f8ff;
-            border-left: 5px solid #4B8BFF;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            margin: 6px 0;
+        .card:hover { 
+            transform:translateY(-6px); 
+            box-shadow:0 6px 18px rgba(0,0,0,.15); 
         }
-        .impact {
-            background-color: #FFF5E6;
-            border-left: 5px solid #FF6600;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            margin: 6px 0;
+        .card img { 
+            border-radius:12px; 
+            margin-bottom:1em; 
+            width:100%; 
+            height:180px; 
+            object-fit:cover; 
         }
-        .btn-back {
-            text-align: center;
-            margin-top: 1.2em;
+        .card-title { 
+            color:#003366 !important; 
+            font-size:1.25rem; 
+            font-weight:700; 
+            margin-bottom:.3em; 
         }
-        .btn-back button {
-            background-color: #003366 !important;
-            color: white !important;
-            border-radius: 10px;
-            padding: 0.6em 1.5em;
-            font-weight: 600;
+        .card-location { 
+            color:#FF6600 !important; 
+            font-weight:600; 
+            font-size:.9rem; 
+            margin-bottom:.5em; 
         }
-        .btn-back button:hover {
-            background-color: #004B8D !important;
+        .card-text { 
+            color:#374151 !important; 
+            font-size:.95rem; 
+            line-height:1.55; 
         }
+
+        /* Detail box */
+        .detail-box { 
+            background:#fff; 
+            border-radius:16px; 
+            box-shadow:0 4px 14px rgba(0,0,0,.08); 
+            padding:2em; 
+            margin-top:1.5em; 
+        }
+        .detail-box * { color:#1f2937 !important; }
+        .detail-title { 
+            font-size:1.4rem; 
+            font-weight:700; 
+            margin:0 0 .6rem 0; 
+        }
+        .detail-img { 
+            width:100%; 
+            height:260px; 
+            object-fit:cover; 
+            border-radius:12px; 
+            margin:.6rem 0 1rem 0; 
+        }
+        .metric { 
+            background:#f5f8ff; 
+            border-left:5px solid #4B8BFF; 
+            padding:12px 16px; 
+            border-radius:10px; 
+            font-size:.95rem; 
+            margin:6px 0; 
+        }
+        .impact { 
+            background:#FFF5E6; 
+            border-left:5px solid #FF6600; 
+            padding:12px 16px; 
+            border-radius:10px; 
+            font-size:.95rem; 
+            margin:6px 0; 
+        }
+
+        /* ✅ Button Styling — White by default, light orange on hover */
+        .stButton > button {
+            background-color: #ffffff !important;
+            color: #002244 !important;
+            border: 1.5px solid #FF6600 !important;
+            border-radius: 10px !important;
+            padding: 0.6em 1.2em !important;
+            font-weight: 600 !important;
+            transition: all 0.25s ease-in-out;
+        }
+        .stButton > button:hover {
+            background-color: #FFD8B0 !important; /* Light orange hover */
+            color: #002244 !important;
+            border-color: #FF6600 !important;
+        }
+        .stButton > button:focus {
+            outline: 2px solid #FFB366 !important;
+            outline-offset: 2px !important;
+        }
+
+        /* Captions & Links */
+        a { color:#002244 !important; text-decoration:none !important; }
+        .caption, .stCaption { color:#6b7280 !important; }
+
+        /* Footer */
+        footer { display:none; }
     </style>
 """, unsafe_allow_html=True)
+
+
+
+
 
 navbar()  # your custom navbar (includes Login/Signup buttons)
 
@@ -147,49 +195,73 @@ if not st.session_state.selected_case:
         st.caption("AI-powered ranking engine for better investment decisions and faster deals.")
 
 else:
-    # ---------------- DETAILED VIEWS ----------------
-    st.markdown("<div class='detail-box'>", unsafe_allow_html=True)
+    # ---------------- DETAILED VIEWS (rendered as one HTML block so content stays inside the box) ----------------
+    case = st.session_state.selected_case
 
-    if st.session_state.selected_case == "mumbai":
-        st.subheader("🏢 AI-Driven Apartment Valuation — Mumbai, India")
-        st.write("""
-        Mumbai's real estate market is fast, fragmented, and highly price-sensitive.  
-        SmartBricks’ **AI-powered valuation system** automated what used to take **weeks** into seconds — ensuring fair, data-backed pricing.
-        """)
-        st.markdown("<div class='metric'>📊 10,000+ apartments analyzed using Random Forest & XGBoost</div>", unsafe_allow_html=True)
-        st.markdown("<div class='metric'>⚙️ Achieved R² = 0.94 | MAE = ₹3.1 lakhs</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>💡 Reduced manual appraisal time by 90%</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>🏦 Adopted by 5 major property lenders for loan risk assessment</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>📈 Helped standardize price variance across suburbs</div>", unsafe_allow_html=True)
+    if case == "mumbai":
+        title = "🏢 AI-Driven Apartment Valuation — Mumbai, India"
+        overview = """Mumbai's real estate market is fast, fragmented, and highly price-sensitive.
+        SmartBricks’ <b>AI-powered valuation system</b> automated what used to take <b>weeks</b> into seconds — ensuring fair, data-backed pricing."""
+        image = "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80"
+        metrics = [
+            "📊 10,000+ apartments analyzed using Random Forest & XGBoost",
+            "⚙️ Achieved R² = 0.94 | MAE = ₹3.1 lakhs",
+        ]
+        impacts = [
+            "💡 Reduced manual appraisal time by 90%",
+            "🏦 Adopted by 5 major property lenders for loan risk assessment",
+            "📈 Helped standardize price variance across suburbs",
+        ]
 
-    elif st.session_state.selected_case == "bengaluru":
-        st.subheader("📊 Predictive Market Insights — Bengaluru, India")
-        st.write("""
-        Bengaluru’s housing demand mirrors its booming tech industry.  
-        Using **LSTM-based time series models**, StreetBase delivers live forecasts of housing prices and investment growth corridors.
-        """)
-        st.markdown("<div class='metric'>🧠 LSTM + Prophet ensemble model for 7 years of transaction data</div>", unsafe_allow_html=True)
-        st.markdown("<div class='metric'>🔍 Incorporated IT job data, metro expansions, and infra growth</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>🚀 93% forecast accuracy — helping developers plan smarter</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>💬 Realtors close deals 25% faster using AI-driven dashboards</div>", unsafe_allow_html=True)
+    elif case == "bengaluru":
+        title = "📊 Predictive Market Insights — Bengaluru, India"
+        overview = """Bengaluru’s housing demand mirrors its booming tech industry.
+        Using <b>LSTM-based time series models</b>, StreetBase delivers live forecasts of housing prices and investment growth corridors."""
+        image = "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80"
+        metrics = [
+            "🧠 LSTM + Prophet ensemble model for 7 years of transaction data",
+            "🔍 Incorporated IT job data, metro expansions, and infra growth",
+        ]
+        impacts = [
+            "🚀 93% forecast accuracy — helping developers plan smarter",
+            "💬 Realtors close deals 25% faster using AI-driven dashboards",
+        ]
 
-    elif st.session_state.selected_case == "delhi":
-        st.subheader("🏙️ Smart Property Comparison Tool — Delhi NCR, India")
-        st.write("""
-        Delhi NCR buyers face overwhelming property choices.  
-        SmartBricks’ **AI recommendation engine** ranks properties based on ROI, amenities, and proximity — saving users hours of research.
-        """)
-        st.markdown("<div class='metric'>⚖️ Ranking model powered by cosine similarity and weighted ROI</div>", unsafe_allow_html=True)
-        st.markdown("<div class='metric'>📉 Reduced search and decision time by 60%</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>🏘️ Integrated by 4+ real estate startups</div>", unsafe_allow_html=True)
-        st.markdown("<div class='impact'>🧩 Increased client conversion by 35% through better matching</div>", unsafe_allow_html=True)
+    else:  # delhi
+        title = "🏙️ Smart Property Comparison Tool — Delhi NCR, India"
+        overview = """Delhi NCR buyers face overwhelming property choices.
+        SmartBricks’ <b>AI recommendation engine</b> ranks properties based on ROI, amenities, and proximity — saving users hours of research."""
+        image = "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80"
+        metrics = [
+            "⚖️ Ranking model powered by cosine similarity and weighted ROI",
+            "📉 Reduced search and decision time by 60%",
+        ]
+        impacts = [
+            "🏘️ Integrated by 4+ real estate startups",
+            "🧩 Increased client conversion by 35% through better matching",
+        ]
 
-    st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("<div class='btn-back'>", unsafe_allow_html=True)
+    # Build the whole detail box as one HTML string so everything stays inside
+    metrics_html = "".join([f"<div class='metric'>{m}</div>" for m in metrics])
+    impacts_html = "".join([f"<div class='impact'>{i}</div>" for i in impacts])
+
+    detail_html = f"""
+    <div class='detail-box'>
+        <div class='detail-title'>{title}</div>
+        <img src="{image}" class="detail-img" />
+        <p>{overview}</p>
+        {metrics_html}
+        {impacts_html}
+    </div>
+    """
+
+    st.markdown(detail_html, unsafe_allow_html=True)
+
+    # Back button (styled by global .stButton CSS)
     if st.button("⬅️ Back to All Case Studies"):
         st.session_state.selected_case = None
         st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
+
 
 # ---------------- FOOTER ----------------
 st.markdown("---")
@@ -197,8 +269,3 @@ st.markdown(
     "<p style='text-align:center; color:#666;'>© 2025 StreetBase | Empowering Indian Real Estate with AI-Driven Insights</p>",
     unsafe_allow_html=True
 )
-def load_case_studies_page():
-    import streamlit as st
-    from components.NavBar.navbar import navbar
-    
-    navbar()
