@@ -1,14 +1,25 @@
-# pages/your_page.py
-import os, sys
-from turtle import st
-ROOT = os.path.dirname(os.path.dirname(__file__))  # .. up to project root
+# pages/home.py
+import os
+import sys
+import streamlit as st
+
+
+
+# --- Add root path for imports ---
+ROOT = os.path.dirname(os.path.dirname(__file__))  # Go up to project root
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from components.NavBar.home import load_navbar
-from components.Hero import load_hero_section
-from components.simple_app import load_model_section
-from components.features import load_footer_section
+# --- Import custom components ---
+
+from components.NavBar.navbar import navbar
+from components.Hero import (
+    custom_css_injection,
+    render_brand_header,
+    render_hero_section,
+    render_cta_banner
+)
+from components.features import load_feature_section
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
@@ -37,14 +48,23 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# ---------------- INITIAL SESSION STATE ----------------
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+if "username" not in st.session_state:
+    st.session_state.username = ""
+
 # ---------------- NAVBAR ----------------
-load_navbar()  # your custom navbar (includes Login/Signup buttons)
+navbar()  # your custom navbar (includes Login/Signup buttons)
 
 # ---------------- HERO SECTION ----------------
-load_hero_section()
+custom_css_injection()
+render_brand_header()
+render_hero_section()
+render_cta_banner()
 
-# ---------------- MODEL SECTION ----------------
-load_model_section()
+# ---------------- FEATURES SECTION ----------------
+load_feature_section()
 
-# ---------------- FOOTER SECTION ----------------
-load_footer_section()
+# ---------------- FOOTER (already included in features) ----------------
+st.markdown("<br><br>", unsafe_allow_html=True)
