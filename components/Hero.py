@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_lottie import st_lottie # Keeping Lottie in case we want to use it elsewhere, though not in this specific reference image
 import requests # Also keeping for Lottie if needed
-
+import os
 # --- Page Configuration ---
 st.set_page_config(
     page_title="SmartBricks - AI Real Estate Valuation",
@@ -188,7 +188,7 @@ def render_brand_header():
     from pathlib import Path
 
     # Placeholder path — you can update this with your actual local logo path
-    logo_path = Path("C:\\Users\\godso\\Downloads\\Infosys\\SmartBricks\\pages\\homepage\\logo3.png")  # <-- Replace with your actual file path
+    logo_path = os.path.join(os.path.dirname(__file__), "NavBar", "logo3.png") # <-- Replace with your actual file path
 
     st.markdown(
         """

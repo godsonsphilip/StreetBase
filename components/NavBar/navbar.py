@@ -9,7 +9,8 @@ def _embed_logo_base64(logo_path):
         return base64.b64encode(f.read()).decode("utf-8")
 
 def navbar():
-    logo_path = os.path.join("pages", "homepage", "logo3.png")
+    logo_path = os.path.join(os.path.dirname(__file__), "logo3.png")
+
     logo_b64 = _embed_logo_base64(logo_path)
     logo_html = (
         f"<img src='data:image/png;base64,{logo_b64}' class='logo' />"
