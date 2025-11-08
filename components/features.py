@@ -96,7 +96,7 @@ def load_feature_section():
     """, unsafe_allow_html=True)
 
     # --- Features Section ---
-    st.markdown("<h2 class='section-header'>🌟 Why Choose SmartBricks?</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 class='section-header'>🌟 Why Choose StreetBase?</h2>", unsafe_allow_html=True)
     st.markdown("<p class='section-subtext'>Our AI-powered platform ensures smarter, faster and more reliable property valuations.</p>", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3, gap="large")
@@ -128,7 +128,7 @@ def load_feature_section():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.markdown("<div class='testimonial-box'>"
-                    "<p>“SmartBricks made our property evaluation 3x faster and more reliable. Love the interface!”</p>"
+                    "<p>StreetBase made our property evaluation 3x faster and more reliable. Love the interface!”</p>"
                     "<b>– Riya Sharma, Realtor</b>"
                     "</div>", unsafe_allow_html=True)
     with col2:
@@ -142,7 +142,7 @@ def load_feature_section():
     # --- Footer ---
     st.markdown("""
         <div class='footer'>
-            © 2025 <b>SmartBricks</b> | All Rights Reserved <br>
+            © 2025 <b>StreetBase</b> | All Rights Reserved <br>
             Built with ❤️ using <a href='https://streamlit.io/' target='_blank'>Streamlit</a> and AI
         </div>
     """, unsafe_allow_html=True)
