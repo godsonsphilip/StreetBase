@@ -3,6 +3,7 @@ import base64
 import os
 
 def _embed_logo_base64(logo_path):
+    """Convert logo to Base64 for inline embedding"""
     if not os.path.exists(logo_path):
         return ""
     with open(logo_path, "rb") as f:
@@ -10,13 +11,15 @@ def _embed_logo_base64(logo_path):
 
 def navbar():
     logo_path = os.path.join(os.path.dirname(__file__), "logo3.png")
-
     logo_b64 = _embed_logo_base64(logo_path)
+
     logo_html = (
         f"<img src='data:image/png;base64,{logo_b64}' class='logo' />"
-        if logo_b64 else "<div style='width:60px;height:60px;background:#fff;'></div>"
+        if logo_b64
+        else "<div style='width:60px;height:60px;background:#fff;'></div>"
     )
 
+    # ---------- AUTH / LOGIN BUTTON ----------
     if st.session_state.get("logged_in", False):
         username = st.session_state.get("username", "")
         auth_html = f"""
@@ -28,46 +31,115 @@ def navbar():
         </div>
         """
     else:
-        auth_html = '<a href="?page=home" class="login-btn">Login / Sign Up</a>'
+        auth_html = '<a href="?page=login_signup" class="login-btn">Login / Sign Up</a>'
 
+    # ---------- NAVBAR HTML ----------
     html = f"""
     <style>
-        /* Navbar below Streamlit deploy bar */
+        /* NAVBAR STYLING */
         .smartbricks-nav {{
-            position: fixed; top: 50px;  /* space for deploy bar */
-            left: 0; width: 100%;
-            background:#003366; color:#fff; z-index:9999;
-            box-shadow:0 2px 10px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 0; /* now at very top */
+            left: 0;
+            width: 100%;
+            background: #003366;
+            color: #fff;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }}
         .smartbricks-nav .container {{
-            display:flex; align-items:center; justify-content:space-between; padding:10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
         }}
-        .nav-left {{ display:flex; align-items:center; gap:12px; }}
-        .logo {{ width:60px; height:60px; border-radius:7px; }}
-        .brand {{ font-size:1.6rem; font-weight:700; color:#FF6600; }}
-        .nav-options {{ display:flex; align-items:center; gap:16px; }}
-        .nav-options a {{ color:#fff; text-decoration:none; font-weight:600; }}
-        .nav-options a:hover {{ color:#FF6600; }}
-        .login-btn {{ background:#FF6600; color:#fff; padding:6px 16px; border-radius:20px; font-weight:600; text-decoration:none; }}
-        .login-btn:hover {{ background:#e65c00; }}
-        .profile-wrap {{ position:relative; }}
+        .nav-left {{
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }}
+        .logo {{
+            width: 60px;
+            height: 60px;
+            border-radius: 7px;
+        }}
+        .brand {{
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #FF6600;
+        }}
+        .nav-options {{
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }}
+        .nav-options a {{
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }}
+        .nav-options a:hover {{
+            color: #FF6600;
+        }}
+        .login-btn {{
+            background: #FF6600;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-decoration: none;
+        }}
+        .login-btn:hover {{
+            background: #e65c00;
+        }}
+        .profile-wrap {{
+            position: relative;
+        }}
         .profile-btn {{
-            background:#fff; border:2px solid #FF6600; color:#FF6600;
-            cursor:pointer; padding:6px 12px; border-radius:20px;
-            font-size:1rem; display:flex; align-items:center; gap:6px;
+            background: #fff;
+            border: 2px solid #FF6600;
+            color: #FF6600;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }}
-        .profile-btn:hover {{ background:#FF6600; color:#fff; }}
+        .profile-btn:hover {{
+            background: #FF6600;
+            color: #fff;
+        }}
         .dropdown-content {{
-            display:none; position:absolute; right:0; top:46px;
-            background:#fff; color:#003366; min-width:150px; border-radius:6px;
-            box-shadow:0 6px 18px rgba(0,0,0,0.15);
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 46px;
+            background: #fff;
+            color: #003366;
+            min-width: 150px;
+            border-radius: 6px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
         }}
-        .dropdown-content a {{ display:block; padding:8px 12px; color:#003366; text-decoration:none; font-weight:600; }}
-        .dropdown-content a:hover {{ background:#F8F8F8; }}
-        .profile-wrap.show .dropdown-content {{ display:block; }}
+        .dropdown-content a {{
+            display: block;
+            padding: 8px 12px;
+            color: #003366;
+            text-decoration: none;
+            font-weight: 600;
+        }}
+        .dropdown-content a:hover {{
+            background: #F8F8F8;
+        }}
+        .profile-wrap.show .dropdown-content {{
+            display: block;
+        }}
 
-        /* Push content below navbar + deploy bar */
-        .main .block-container {{ padding-top: 230px; }}
+        /* Reduce top padding for page content */
+        .block-container {{
+            padding-top: 100px !important;
+        }}
     </style>
 
     <div class="smartbricks-nav">
@@ -77,12 +149,12 @@ def navbar():
           <div class="brand">StreetBase</div>
         </div>
         <div class="nav-options">
-          <a href="?page=home">Home</a>
-          <a href="#">Services</a>
-          <a href="#">Case Studies</a>
-          <a href="#">News</a>
-          <a href="#">Contact</a>
-          {auth_html}
+            <a href="?page=home">Home</a>
+            <a href="?page=services">Services</a>
+            <a href="?page=case_studies">Case Studies</a>
+            <a href="?page=news">News</a>
+            <a href="?page=AboutUs">About Us</a>
+            {auth_html}
         </div>
       </div>
     </div>
@@ -90,29 +162,24 @@ def navbar():
     <script>
         const profileBtn = document.getElementById('profileBtn');
         const profileWrap = document.getElementById('profileWrap');
-        if(profileBtn){{
+        if (profileBtn) {{
             profileBtn.addEventListener('click', e => {{
                 e.stopPropagation();
                 profileWrap.classList.toggle('show');
             }});
         }}
         document.addEventListener('click', e => {{
-            if(profileWrap && !profileWrap.contains(e.target)){{
+            if (profileWrap && !profileWrap.contains(e.target)) {{
                 profileWrap.classList.remove('show');
             }}
         }});
         const logoutBtn = document.getElementById('logoutBtn');
-        if(logoutBtn){{
+        if (logoutBtn) {{
             logoutBtn.addEventListener('click', () => {{
                 window.location.href = "?page=home&logout=true";
             }});
         }}
     </script>
     """
-    st.markdown(html, unsafe_allow_html=True)
 
-# Optional logout handler
-if "logout" in st.query_params:
-    st.session_state.logged_in = False
-    st.session_state.username = ""
-    st.session_state.page = "home"
+    st.markdown(html, unsafe_allow_html=True)

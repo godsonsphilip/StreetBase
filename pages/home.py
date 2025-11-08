@@ -52,6 +52,7 @@ if "logged_in" not in st.session_state:
 if "username" not in st.session_state:
     st.session_state.username = ""
 
+
 # ---------------- NAVBAR ----------------
 navbar()  # your custom navbar (includes Login/Signup buttons)
 
