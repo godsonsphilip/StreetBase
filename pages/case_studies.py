@@ -197,3 +197,8 @@ st.markdown(
     "<p style='text-align:center; color:#666;'>© 2025 StreetBase | Empowering Indian Real Estate with AI-Driven Insights</p>",
     unsafe_allow_html=True
 )
+def load_case_studies_page():
+    import streamlit as st
+    from components.NavBar.navbar import navbar
+    
+    navbar()

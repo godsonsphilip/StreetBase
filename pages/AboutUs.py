@@ -243,3 +243,10 @@ st.markdown("""
     <b>StreetBase</b> © 2025 — Innovating Real Estate Intelligence with AI
 </div>
 """, unsafe_allow_html=True)
+
+
+def load_about_us_page():
+    import streamlit as st
+    from components.NavBar.navbar import navbar
+
+    navbar()
