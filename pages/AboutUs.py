@@ -1,3 +1,11 @@
+# --- put these 5 lines at the very top ---
+from pathlib import Path
+import sys
+ROOT = Path(__file__).resolve().parents[1]  # points to .../SmartBricks
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+# -----------------------------------------
+
 from components.NavBar.navbar import navbar
 import qrcode
 import io
@@ -243,3 +251,10 @@ st.markdown("""
     <b>StreetBase</b> © 2025 — Innovating Real Estate Intelligence with AI
 </div>
 """, unsafe_allow_html=True)
+
+
+def load_about_us_page():
+    import streamlit as st
+    from components.NavBar.navbar import navbar
+
+    navbar()

@@ -1,3 +1,4 @@
+
 ﻿# Python cache
 __pycache__/
 *.pyc
@@ -6,3 +7,19 @@ __pycache__/
 # Large model files
 Assets/real_estate_model.pkl
 pages/real_estate_model.pkl
+
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore large model and dataset files
+*.pkl
+*.csv
+*.zip
+Assets/
+pages/real_estate_model.pkl
+
+
