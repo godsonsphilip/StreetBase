@@ -15,4 +15,11 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Ignore large model and dataset files
+*.pkl
+*.csv
+*.zip
+Assets/
+pages/real_estate_model.pkl
+
 
