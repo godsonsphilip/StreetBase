@@ -1,0 +1,8 @@
+﻿# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Large model files
+Assets/real_estate_model.pkl
+pages/real_estate_model.pkl
