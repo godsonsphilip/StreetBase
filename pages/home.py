@@ -167,9 +167,17 @@ def load_valuation_section():
         return default
 
     # Load model
+    # Debug: Show the path being checked
+    if not MODEL_FILE.exists():
+        st.error(f"❌ Model not found at: {MODEL_FILE}")
+        st.info(f"📁 Current working directory: {Path.cwd()}")
+        st.info(f"📂 ROOT directory: {ROOT}")
+        st.info(f"📂 ROOT_ASSETS directory: {ROOT_ASSETS}")
+        return
+    
     meta = load_model_metadata()
     if not meta:
-        st.error("❌ Model not found. Please ensure 'real_estate_model.pkl' exists in Assets folder.")
+        st.error("❌ Failed to load model. Please check the model file format.")
         return
 
     model = meta.get('model')
