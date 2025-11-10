@@ -8,8 +8,16 @@ sys.path.insert(0, project_root)
 sys.path.append(os.path.join(project_root, "components"))
 sys.path.append(os.path.join(project_root, "pages"))
 
-# ✅ Import navbar (only once)
+# ✅ Import navbar and Hero components
 from components.NavBar.navbar import navbar
+from components.Hero import (
+    custom_css_injection,
+    render_brand_header,
+    render_hero_section,
+    render_cta_banner
+)
+from components.features import load_feature_section
+from components.simple_app import load_valuation_section
 
 # ---------------- STREAMLIT CONFIG ----------------
 st.set_page_config(page_title="StreetBase", page_icon="🏠", layout="wide")
