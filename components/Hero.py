@@ -2,13 +2,6 @@ import streamlit as st
 from streamlit_lottie import st_lottie # Keeping Lottie in case we want to use it elsewhere, though not in this specific reference image
 import requests # Also keeping for Lottie if needed
 import os
-# --- Page Configuration ---
-st.set_page_config(
-    page_title="StreetBase - AI Real Estate Valuation",
-    page_icon="🏠",
-    layout="wide" # Use wide layout for more space
-    # initial_sidebar_state="expanded" # Optional: if you had a sidebar
-)
 
 # --- Custom CSS Injection (To match the reference image closely) ---
 def custom_css_injection():
