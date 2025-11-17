@@ -1,5 +1,5 @@
 import streamlit as st
-from PropeX_chatbot import init_bot, answer_query
+from StreetBase_chatbot import init_bot, answer_query
 
 def chatbot_popup():
     if "chunks" not in st.session_state:
@@ -63,7 +63,7 @@ def chatbot_popup():
         with popup_placeholder.container():
             st.markdown('<div id="chat-popup-box">', unsafe_allow_html=True)
 
-            st.markdown("### PropeX Chatbot")
+            st.markdown("### StreetBase Chatbot")
 
             if st.button(" Close", key="close_btn"):
                 st.session_state.popup_open = False
