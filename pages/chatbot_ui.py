@@ -2,16 +2,11 @@ import streamlit as st
 from PropeX_chatbot import init_bot, answer_query
 
 def chatbot_popup():
-
-    # Backend init
     if "chunks" not in st.session_state:
         st.session_state.chunks, st.session_state.embeddings = init_bot()
         st.session_state.chat_history = []
         st.session_state.popup_open = False
 
-    # -------------------------------------------------------------------
-    # GLOBAL CSS (NOT inside containers!)
-    # -------------------------------------------------------------------
     st.markdown("""
         <style>
 
@@ -53,22 +48,14 @@ def chatbot_popup():
         </style>
     """, unsafe_allow_html=True)
 
-    # -------------------------------------------------------------------
-    # FLOATING BUTTON (REAL STREAMLIT BUTTON)
-    # -------------------------------------------------------------------
-    # A placeholder that renders OUTSIDE layout flow
     bubble_placeholder = st.empty()
 
     with bubble_placeholder.container():
-        # Place HTML div but wrap button in transparent container
         st.markdown('<div id="floating-chat-btn">', unsafe_allow_html=True)
         if st.button("💬", key="floating_chat_button"):
             st.session_state.popup_open = True
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # -------------------------------------------------------------------
-    # CHAT POPUP WINDOW
-    # -------------------------------------------------------------------
     if st.session_state.popup_open:
 
         popup_placeholder = st.empty()
@@ -76,17 +63,15 @@ def chatbot_popup():
         with popup_placeholder.container():
             st.markdown('<div id="chat-popup-box">', unsafe_allow_html=True)
 
-            st.markdown("### 📄 PropeX PDF Chatbot")
+            st.markdown("### PropeX Chatbot")
 
-            if st.button("❌ Close", key="close_btn"):
+            if st.button(" Close", key="close_btn"):
                 st.session_state.popup_open = False
                 st.rerun()
 
-            # Chat history
             for sender, msg in st.session_state.chat_history:
                 st.chat_message("user" if sender=="user" else "assistant").markdown(msg)
 
-            # Chat input
             user_query = st.chat_input("Ask something about the PDF")
 
             if user_query:

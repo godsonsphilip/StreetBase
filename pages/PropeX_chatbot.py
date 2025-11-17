@@ -5,22 +5,16 @@ from PyPDF2 import PdfReader
 import torch
 import re
 
-# Prevent tokenizer fork warnings
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-# OpenRouter client
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key="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"
 )
 
-# Load embedder ONCE globally (important for performance)
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
-
-# -------------------------------------------------------------
 # PDF Extraction
-# -------------------------------------------------------------
 def extract_text_from_pdf(pdf_path):
     reader = PdfReader(pdf_path)
     text = ""
@@ -32,9 +26,6 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 
-# -------------------------------------------------------------
-# Chunk Function
-# -------------------------------------------------------------
 def chunk_text(text, words_per_chunk=800):
     words = text.split()
     return [
@@ -42,10 +33,6 @@ def chunk_text(text, words_per_chunk=800):
         for i in range(0, len(words), words_per_chunk)
     ]
 
-
-# -------------------------------------------------------------
-# INIT BOT (must return EXACTLY 2 values)
-# -------------------------------------------------------------
 def init_bot(pdf_path="abc2.pdf"):
     print("📄 Loading PDF...")
     pdf_text = extract_text_from_pdf(pdf_path)
@@ -59,14 +46,8 @@ def init_bot(pdf_path="abc2.pdf"):
     chunk_embeddings = embedder.encode(chunks, convert_to_tensor=True)
 
     print("🤖 Chatbot Backend Ready!")
-
-    # ❗ RETURN EXACTLY 2 VALUES (as required by UI)
     return chunks, chunk_embeddings
 
-
-# -------------------------------------------------------------
-# ANSWER QUERY
-# -------------------------------------------------------------
 def answer_query(query, chunks, chunk_embeddings):
 
     query_emb = embedder.encode(query, convert_to_tensor=True)
