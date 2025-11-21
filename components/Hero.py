@@ -10,90 +10,87 @@ st.set_page_config(
     # initial_sidebar_state="expanded" # Optional: if you had a sidebar
 )
 
-# --- Custom CSS Injection (To match the reference image closely) ---
 def custom_css_injection():
-    """
-    Injects custom CSS to style the Streamlit elements according to the reference image.
-    """
     custom_css = """
     <style>
-        /* --- Import Google Font 'Inter' (similar to reference) --- */
+        /* --- Import Google Font 'Inter' --- */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         html, body, [data-testid="stAppViewContainer"] {
             font-family: 'Inter', sans-serif;
             color: #333333;
-            background-color: #F8F9FA; /* Light grey background for the whole app */
+            background-color: #F8F9FA;
         }
-        
-        /* Main container for the hero section to control its background and padding */
+
+        /* 🔹 Reduce default Streamlit top padding */
+        .main .block-container {
+            padding-top: 0.5rem !important;  /* was ~4rem by default */
+        }
+
+        /* Main container for the hero section */
         .main-hero-container {
-            background-color: #FFFFFF; /* White background for the main content area */
+            background-color: #FFFFFF;
             border-radius: 12px;
-            padding: 3rem; /* Generous padding */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Subtle shadow */
+            padding: 3rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
-            display: flex; /* Use flexbox for inner layout */
-            align-items: center; /* Vertically align items */
+            display: flex;
+            align-items: center;
         }
-        
-        /* Specific styling for the right insights column */
+
         .quick-insights-box {
-            background-color: #EBF2FF; /* Light blue background for the insights box */
+            background-color: #EBF2FF;
             border-radius: 12px;
             padding: 2rem;
-            margin-left: 2rem; /* Space from left column */
-            height: 100%; /* Ensure it fills height of its parent container */
+            margin-left: 2rem;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
-        
-        /* --- Text Styling --- */
+
         h1 {
-            font-size: 2.8rem !important; /* Larger, bolder title */
+            font-size: 2.8rem !important;
             font-weight: 800 !important;
-            color: #002D62 !important; /* Dark blue */
+            color: #002D62 !important;
             line-height: 1.1;
             margin-bottom: 0.5rem;
         }
-        
-        h2 { /* Quick Insights title */
+
+        h2 {
             font-size: 1.6rem !important;
             font-weight: 700 !important;
-            color: #0047AB !important; /* Medium blue */
+            color: #0047AB !important;
             margin-bottom: 1.5rem !important;
         }
 
-        /* Subheader like "Ready to Evaluate Your Property?" */
         .cta-banner h2 {
             font-size: 2.2rem !important;
             font-weight: 700 !important;
-            color: #FFFFFF !important; /* White for the dark banner */
+            color: #FFFFFF !important;
             text-align: center;
             margin-bottom: 1rem !important;
         }
-        
-        p, .stMarkdown, .stText {{
+
+        p, .stMarkdown, .stText {
             font-size: 1.05rem;
             line-height: 1.6;
             color: #4A4A4A;
-        }}
-        
-        /* Bullet points with emojis */
-        ul li {{
+        }
+
+        ul li {
             margin-bottom: 0.5rem;
             font-size: 1.05rem;
             color: #4A4A4A;
-        }}
-        .insights-list li { /* Specific styling for quick insights list */
-            list-style: none; /* Remove default bullet */
+        }
+        .insights-list li {
+            list-style: none;
             margin-bottom: 0.7rem;
             font-size: 1.05rem;
             color: #333333;
         }
         .insights-list li::before {
-            content: "✅"; /* Checkmark emoji */
+            content: "✅";
             margin-right: 0.8em;
         }
 
@@ -101,7 +98,7 @@ def custom_css_injection():
         .stButton > button {
             border-radius: 8px !important;
             font-weight: 600 !important;
-            padding: 12px 25px !important; /* Good size */
+            padding: 12px 25px !important;
             font-size: 1rem !important;
             transition: all 0.2s ease-in-out !important;
             border: none !important;
@@ -109,24 +106,24 @@ def custom_css_injection():
         }
 
         .stButton > button[kind="primary"] {
-            background-color: #007BFF !important; /* Primary blue */
+            background-color: #007BFF !important;
             color: white !important;
-            margin-right: 15px; /* Space between buttons */
+            margin-right: 15px;
         }
 
         .stButton > button[kind="primary"]:hover {
-            background-color: #0056b3 !important; /* Darker blue on hover */
+            background-color: #0056b3 !important;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
             transform: translateY(-2px);
         }
 
         .stButton > button[kind="secondary"] {
-            background-color: #28A745 !important; /* Green for 'View Insights' */
+            background-color: #28A745 !important;
             color: white !important;
         }
-        
+
         .stButton > button[kind="secondary"]:hover {
-            background-color: #218838 !important; /* Darker green on hover */
+            background-color: #218838 !important;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
             transform: translateY(-2px);
         }
@@ -135,47 +132,49 @@ def custom_css_injection():
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 10px; /* Space between logo and text */
-            margin-bottom: 2rem;
-            padding: 1.5rem 0; /* Padding around the logo/brand */
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            /* 🔹 Remove big top padding here */
+            padding: 0.25rem 0 1.5rem 0;  /* small top, keep some bottom */
         }
+
         .logo-img {
-            height: 40px; /* Size of the house icon */
+            height: 40px;
         }
+
         .brand-title {
             font-size: 1.8rem;
             font-weight: 700;
             color: #002D62;
-            margin: 0; /* Remove default margins */
+            margin: 0;
         }
 
         /* --- Bottom CTA Banner --- */
         .cta-banner {
-            background-color: #007BFF; /* A solid blue for the banner */
+            background-color: #007BFF;
             color: white;
             border-radius: 12px;
             padding: 3rem 2rem;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-top: 3rem; /* Space from the main content */
+            margin-top: 3rem;
         }
         .cta-banner .emoji {
-            font-size: 3rem; /* Size of the rocket emoji */
+            font-size: 3rem;
             margin-bottom: 1rem;
-            display: block; /* Make it a block element to center */
+            display: block;
         }
         .cta-banner p {
-            color: #EBF2FF; /* Lighter white for body text */
+            color: #EBF2FF;
             max-width: 800px;
-            margin: 0 auto; /* Center the paragraph */
+            margin: 0 auto;
             font-size: 1.1rem;
         }
-        
-        /* Remove default Streamlit header/footer */
+
+        /* Remove default Streamlit header/footer (no gap) */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
-        header {visibility: hidden;}
-
+        header {display: none;}  /* 🔹 use display:none instead of visibility */
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)

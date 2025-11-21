@@ -1,4 +1,5 @@
 import streamlit as st
+from components.chatbot_ui import chatbot_popup  # 👈 add this
 
 def load_feature_section():
     # --- Custom CSS aligned with the Classic Corporate (Blue & Neutrals) palette ---
@@ -139,6 +140,7 @@ def load_feature_section():
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
+    chatbot_popup()  # 👈 this will render the StreetBase chat section here
     # --- Footer ---
     st.markdown("""
         <div class='footer'>

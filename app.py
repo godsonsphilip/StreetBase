@@ -1,5 +1,11 @@
-import streamlit as st
 import os
+
+# 👉 Set these BEFORE importing anything else that might use OpenMP (torch, transformers, etc.)
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+import streamlit as st
+
 import sys
 
 # ✅ Ensure root paths work properly
@@ -7,9 +13,11 @@ project_root = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, project_root)
 sys.path.append(os.path.join(project_root, "components"))
 sys.path.append(os.path.join(project_root, "pages"))
+sys.path.append(os.path.join(project_root, "backend")) 
 
 # ✅ Import navbar (only once)
 from components.NavBar.navbar import navbar
+from components.chatbot_ui import chatbot_popup  # 🟢 add this
 
 # ---------------- STREAMLIT CONFIG ----------------
 st.set_page_config(page_title="StreetBase", page_icon="🏠", layout="wide")
@@ -97,3 +105,4 @@ try:
 
 except Exception as e:
     st.error(f"Error loading page: {e}")
+
