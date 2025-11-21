@@ -8,10 +8,8 @@ import os
 def load_services_page():
     
 
+    
     navbar()
-    # --- PAGE CONFIG ---
-    st.set_page_config(page_title="Our Services | AI Real Estate", page_icon="🏠", layout="wide")
-
     # --- LOAD LOTTIE ANIMATION FUNCTION ---
     # --- LOAD LOCAL LOTTIE JSON FILE ---
     import json
@@ -132,7 +130,7 @@ def load_services_page():
     </style>
     """, unsafe_allow_html=True)
 
-    navbar()  # your custom navbar (includes Login/Signup buttons)
+    
 
     # --- PAGE HEADER ---
     st.markdown("<h2>Our Services</h2>", unsafe_allow_html=True)

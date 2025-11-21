@@ -11,10 +11,10 @@ import joblib
 import os
 
 # Page configuration
-st.set_page_config(page_title="News & Articles", layout="wide")
+# st.set_page_config(page_title="News & Articles", layout="wide")
 
 # Display navbar
-navbar()
+
 
 # --- Configuration ---
 API_KEY = "d4d290fde3d8464b8d689e5726ebfd45" 

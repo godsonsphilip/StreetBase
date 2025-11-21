@@ -15,12 +15,11 @@ import streamlit as st # <-- Move this line to the top
 
 def load_about_us_page():
     
-
     navbar()
         # -----------------------------------------------------------
     # PAGE CONFIG
     # -----------------------------------------------------------
-    st.set_page_config(page_title="StreetBase", layout="wide")
+    
 
     # ... (rest of your code remains the same) ...
 
@@ -174,7 +173,7 @@ def load_about_us_page():
     </style>
     """, unsafe_allow_html=True)
 
-    navbar()  # your custom navbar (includes Login/Signup buttons)
+     # your custom navbar (includes Login/Signup buttons)
 
     # -----------------------------------------------------------
     # HEADER

@@ -3,6 +3,7 @@ import pandas as pd
 import json
 from datetime import datetime
 from uuid import uuid4
+from components.NavBar.navbar import navbar
 
 
 def init_favourites_state():
@@ -12,6 +13,7 @@ def init_favourites_state():
 
 
 def render_favourites_page():
+    navbar() 
     init_favourites_state()
 
     st.title("⭐ Favourites")
@@ -201,5 +203,3 @@ def render_favourites_page():
 
 # If this is in pages, just call render_favourites_page() at the bottom.
 # Example:
-if __name__ == "__main__":
-    render_favourites_page()

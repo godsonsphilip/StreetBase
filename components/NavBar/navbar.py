@@ -2,6 +2,9 @@ import streamlit as st
 import base64
 import os
 
+
+
+
 def _embed_logo_base64(logo_path):
     """Convert logo to Base64 for inline embedding"""
     if not os.path.exists(logo_path):
@@ -10,6 +13,9 @@ def _embed_logo_base64(logo_path):
         return base64.b64encode(f.read()).decode("utf-8")
 
 def navbar():
+    st.session_state['_force_navbar_refresh'] = st.session_state.get('_force_navbar_refresh', 0) + 1
+    st.cache_data.clear()
+    st.cache_resource.clear()
     logo_path = os.path.join(os.path.dirname(__file__), "logo3.png")
     logo_b64 = _embed_logo_base64(logo_path)
 
@@ -151,6 +157,8 @@ def navbar():
             <a href="?page=home">Home</a>
             <a href="?page=services">Services</a>
             <a href="?page=case_studies">Case Studies</a>
+            <a href="?page=favourites">Favourites</a>
+            <a href="?page=emi_calc">EMI_Calc</a>
             <a href="?page=news">News</a>
             <a href="?page=AboutUs">About Us</a>
             {auth_html}

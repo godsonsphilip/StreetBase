@@ -2,9 +2,8 @@ import streamlit as st
 from components.NavBar.navbar import navbar
 
 def load_case_studies_page():
-    # ---------------- PAGE CONFIG ----------------
-    st.set_page_config(page_title="Case Studies | StreetBase AI", page_icon="🏙️", layout="wide")
 
+    navbar()
     # ---------------- CUSTOM STYLES ----------------
   
     st.markdown("""
@@ -121,8 +120,8 @@ def load_case_studies_page():
         </style>
     """, unsafe_allow_html=True)
 
-
-    navbar()  # show navbar
+    
+      # show navbar
 
     # ---------------- HEADER ----------------
     st.markdown("<div class='title'>🏗️ Case Studies</div>", unsafe_allow_html=True)

@@ -24,7 +24,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-navbar()
+
 
 # ---------------- LOGOUT HANDLER ----------------
 # ---------------- LOGOUT HANDLER ----------------
@@ -36,8 +36,13 @@ if "logout" in query_params and query_params["logout"] == "true":
     st.query_params.clear()
     st.query_params["page"] = "home"
     st.rerun()
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+if "username" not in st.session_state:
+    st.session_state.username = ""
 
 
+navbar()
 
 # ---------------- PAGE ROUTING ----------------
 page = st.query_params.get("page", "home")
@@ -79,6 +84,13 @@ try:
     elif page == "Signin":
         import pages.Signin as signin
         signin.load_signin_page()
+    elif page == "favourites":
+        import pages.favourites as fav
+        fav.render_favourites_page()
+
+    elif page == "emi_calc":
+        import pages.emi_calc as emi
+        emi.render_emi_calculator()
 
     else:
         st.error("404 - Page not found 😢")
