@@ -1,13 +1,13 @@
 import streamlit as st
-from streamlit_lottie import st_lottie # Keeping Lottie in case we want to use it elsewhere, though not in this specific reference image
-import requests # Also keeping for Lottie if needed
+from streamlit_lottie import st_lottie 
+import requests 
 import os
+
 # --- Page Configuration ---
 st.set_page_config(
     page_title="StreetBase - AI Real Estate Valuation",
     page_icon="🏠",
-    layout="wide" # Use wide layout for more space
-    # initial_sidebar_state="expanded" # Optional: if you had a sidebar
+    layout="wide" 
 )
 
 def custom_css_injection():
@@ -181,13 +181,10 @@ def custom_css_injection():
 
 # --- Components for Member 2 ---
 
-# Function for the logo and brand title
-# Function for the logo and brand title using a local file
 def render_brand_header():
     from pathlib import Path
-
     # Placeholder path — you can update this with your actual local logo path
-    logo_path = os.path.join(os.path.dirname(__file__), "NavBar", "logo3.png") # <-- Replace with your actual file path
+    logo_path = os.path.join(os.path.dirname(__file__), "NavBar", "logo3.png") 
 
     st.markdown(
         """
@@ -197,7 +194,7 @@ def render_brand_header():
     )
 
     # Display local logo
-    st.image(str(logo_path), width=40)  # Width matches previous styling
+    st.image(str(logo_path), width=40) 
 
     # Brand title
     st.markdown(
@@ -210,7 +207,6 @@ def render_brand_header():
 
 
 def render_hero_section():
-    # Anchor that our CSS targets; the NEXT horizontal block (columns) becomes the card
     st.markdown('<div id="hero-card-anchor"></div>', unsafe_allow_html=True)
 
     col_left, col_right = st.columns([2.5, 1], gap="large")
@@ -261,8 +257,6 @@ def render_hero_section():
         st.markdown("</div>", unsafe_allow_html=True)
 
 
-
-
 def render_cta_banner():
     st.markdown(
         """
@@ -280,14 +274,11 @@ def render_cta_banner():
 
 
 # --- Main App Execution ---
-# --- Main App Execution ---
 if __name__ == "__main__":
     custom_css_injection() # Apply our custom styles first
 
     render_brand_header() # Logo and SmartBricks title
     render_hero_section() # Main hero content and quick insights
     render_cta_banner()   # Bottom call-to-action banner
-    
-    # Placeholder for other members' work (will also adopt the custom styles)
-    st.markdown("<br><br>", unsafe_allow_html=True) # Add some vertical space
-    
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
